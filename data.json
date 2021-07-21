@@ -1,0 +1,13 @@
+{
+	"question": [
+		"Q1. Which year PYTHON was created?",
+		"Q2. Who created Python?",
+		"Q3. Which country was Python created in"
+	],
+	"answer": [3, 1, 3],
+	"options": [
+		["1990", "1989", "1991", "1981"],
+		["Guido van Rossum", "Dennis Ritchie", "James Gosling", "Brendan Eich"],
+		["USA", "United Kingdom", "Netherlands", "Denmark"]
+	]
+}
