@@ -1,4 +1,4 @@
 # quiz-game-with-python
-Creating a quiz game using python and tkinter
+Creating a math game using python and tkinter for my daughter
 
 You can change the questions in json file

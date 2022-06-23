@@ -1,10 +1,8 @@
-# import the necessary libraries
 from tkinter import *
 from tkinter import messagebox as mb
 import json
-
-# create class to define the quiz GUI
-
+from util import mathEvaluation
+import generate
 
 class Quiz:
     # This method sets the question count to 0. and initialize all the other methoods to display the content and make all the functionalities available
@@ -29,6 +27,7 @@ class Quiz:
         self.display_options()
 
         # displays the button for next and exit.
+        
         self.buttons()
 
         # no of questions
@@ -71,7 +70,8 @@ class Quiz:
     # question then it calls display result to show the message box.
     # otherwise shows next question.
     def next_btn(self):
-
+        if self.opt_selected.get() == 0:
+            return
         # Check if the answer is correct
         if self.check_ans(self.q_no):
 
@@ -91,6 +91,7 @@ class Quiz:
             gui.destroy()
         else:
             # shows the next question
+            self.display_title()
             self.display_question()
             self.display_options()
 
@@ -150,13 +151,13 @@ class Quiz:
     # This method is used to Display Title
 
     def display_title(self):
+        # The previous answer to be shown
+        if self.q_no > 0:
+            title = Label(gui, text=f"{question[self.q_no-1]}={mathEvaluation(question[self.q_no-1])}",
+                        width=50, bg="gray25", fg="white", font=("ariel", 20, "bold"))
 
-        # The title to be shown
-        title = Label(gui, text="GeeksforGeeks QUIZ",
-                      width=50, bg="gray25", fg="white", font=("ariel", 20, "bold"))
-
-        # place of the title
-        title.place(x=0, y=2)
+            # place of the title
+            title.place(x=0, y=2)
 
     # This method shows the radio buttons to select the Question
     # on the screen at the specified position. It also returns a
@@ -198,7 +199,7 @@ gui = Tk()
 gui.geometry("800x450")
 
 # set the title of the Window
-gui.title("GeeksforGeeks Quiz")
+gui.title("Math Quiz")
 
 # get the data from the json file
 with open('data.json') as f:
