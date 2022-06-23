@@ -7,7 +7,7 @@ ans = {}
 numQuestions = 20
 
 for i in range(numQuestions):
-    ans.setdefault("question", []).append(f"{i+1}. {random.randint(4, 9)}x{random.randint(6, 9)}" )    
+    ans.setdefault("question", []).append(f"{random.randint(4, 9)}x{random.randint(6, 9)}" )    
     ans.setdefault("answer", []).append(random.randint(1,4))
     ans.setdefault("options", []).append([random.randint(35, 101) for _ in range(0,4)])
     trueAnswer = mathEvaluation(ans["question"][-1] )
