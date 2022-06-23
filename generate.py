@@ -19,5 +19,5 @@ for i in range(numQuestions):
 
     ans["options"][-1][ locAnswer ] = trueAnswer 
 
-with open("data.json", "w") as f:
+with open(os.path.join("data", "data.json"), "w") as f:
     json.dump(ans, f)

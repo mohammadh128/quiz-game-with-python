@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox as mb
-import json
+import json, os
 from util import mathEvaluation
 import generate
 
@@ -110,7 +110,7 @@ gui = Tk()
 gui.geometry("800x450")
 gui.title("Math Quiz")
 
-with open('data.json') as f:
+with open(os.path.join("data", "data.json")) as f:
     data = json.load(f)
 
 quiz = Quiz(data['question'], data['options'], data['answer'])
