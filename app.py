@@ -88,7 +88,7 @@ class Quiz:
     def display_title(self):
         # The previous answer to be shown
         if self.q_no > 0:
-            title = Label(gui, text=f"{self.questions[self.q_no-1]}={mathEvaluation(self.questions[self.q_no-1])}",
+            title = Label(gui, text=f"{self.questions[self.q_no-1]} = {mathEvaluation(self.questions[self.q_no-1])}",
                         width=50, bg="gray25", fg="white", font=("ariel", 20, "bold"))
             title.place(x=0, y=2)
 
