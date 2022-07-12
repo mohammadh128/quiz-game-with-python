@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import messagebox as mb
 import json, os
+
+from numpy import datetime_as_string
 from util import mathEvaluation
 import generate
 
@@ -10,6 +12,9 @@ class Quiz:
         self.options = options
         self.answers = answers
         self.q_no = 0
+        # no of questions
+        self.data_size = len(self.questions)
+        self.correct = 0
         # opt_selected holds an integer value which is used for
         # selected option in a question.
         self.opt_selected = IntVar()
@@ -18,9 +23,7 @@ class Quiz:
         self.opts = self.radio_buttons()
         self.display_options()
         self.buttons()
-        # no of questions
-        self.data_size = len(self.questions)
-        self.correct = 0
+
 
     def display_result(self):
         # calculates the wrong count
@@ -81,16 +84,32 @@ class Quiz:
             val += 1
 
     def display_question(self):
-        q_no = Label(gui, text=f"{self.q_no+1}. {self.questions[self.q_no]}", width=60,
-                     font=('ariel', 16, 'bold'), anchor='w')
-        q_no.place(x=70, y=100)
-
+        if self.q_no == 0:
+            self.q_nolabel = Label(gui, text=f"{self.q_no+1}. {self.questions[self.q_no]}", width=60,
+                        font=('ariel', 16, 'bold'), anchor='w')
+            self.q_nolabel.place(x=70, y=100)
+        else:
+            self.q_nolabel.configure(text=f"{self.q_no+1}. {self.questions[self.q_no]}")
+            
     def display_title(self):
+        score_total = int((self.data_size - (self.q_no - self.correct) ) /self.data_size * 100)
         # The previous answer to be shown
-        if self.q_no > 0:
-            title = Label(gui, text=f"{self.questions[self.q_no-1]} = {mathEvaluation(self.questions[self.q_no-1])}",
+        if self.q_no == 1:
+            self.title = Label(gui, text=f"{self.questions[self.q_no-1]} = {mathEvaluation(self.questions[self.q_no-1])}",
                         width=50, bg="gray25", fg="white", font=("ariel", 20, "bold"))
-            title.place(x=0, y=2)
+            self.title.place(x=0, y=2)
+            
+            self.score = Label(gui, text=f"{score_total}%",
+                        width=10, bg="gray25", fg="white", font=("ariel", 20, "bold"))
+            # score.place(x=20, y=2)
+            self.score.pack(side=RIGHT)#padx=250, pady=2)
+        elif self.q_no > 1:
+            self.title.configure(text=f"{self.questions[self.q_no-1]} = {mathEvaluation(self.questions[self.q_no-1])}")
+            self.score.configure(text=f"{score_total}%")
+
+            score_answerd = int(self.correct / self.q_no * 100)
+            with open("score.txt", "w") as sf:
+                sf.write(f"Score: {score_answerd}%, Answered: {self.q_no}/{self.data_size}")
 
     def radio_buttons(self):
         q_list = []
