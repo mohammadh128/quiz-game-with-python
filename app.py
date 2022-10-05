@@ -84,12 +84,13 @@ class Quiz:
             val += 1
 
     def display_question(self):
+        message = f"{self.q_no+1}. {self.questions[self.q_no]}\t\t(of {self.data_size})"
         if self.q_no == 0:
-            self.q_nolabel = Label(gui, text=f"{self.q_no+1}. {self.questions[self.q_no]}", width=60,
+            self.q_nolabel = Label(gui, text=message, width=60,
                         font=('ariel', 16, 'bold'), anchor='w')
             self.q_nolabel.place(x=70, y=100)
         else:
-            self.q_nolabel.configure(text=f"{self.q_no+1}. {self.questions[self.q_no]}")
+            self.q_nolabel.configure(text=message)
             
     def display_title(self):
         score_total = int((self.data_size - (self.q_no - self.correct) ) /self.data_size * 100)
